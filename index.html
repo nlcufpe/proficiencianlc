@@ -228,6 +228,10 @@
     background: #fffbf4; color: #b07000; border-color: #fde5b8;
     cursor: default; pointer-events: none;
   }
+  .btn-encerrado {
+    background: #fdf2f2; color: #c0392b; border-color: #f5c6c6;
+    cursor: default; pointer-events: none;
+  }
 
   /* Info box */
   .info-box {
@@ -455,7 +459,7 @@ const programas = {
   geral: {
     name: 'ProfNLC Geral',
     sub: 'Edital 012/2026 · Leitura em Inglês, Francês e Espanhol',
-    info: 'Destinado a alunos de qualquer programa de pós-graduação da UFPE e ao público geral! Verifique se o seu PPG aceita o ProfNLC Geral ou exige exame específico. Inscrições a partir do dia 20 de agosto.',
+    info: 'Destinado a alunos de qualquer programa de pós-graduação da UFPE. Verifique se o seu PPG aceita o ProfNLC Geral ou exige exame específico. Inscrições somente no dia 20 de agosto.',
     idiomas: ['Inglês', 'Francês', 'Espanhol'],
     cor: '#f7941d',
     edital: 'https://drive.google.com/file/d/1rSeApZfHWtZsmMr7KLonbbI9Klj2qsAL/view?usp=sharing',
@@ -468,7 +472,7 @@ const programas = {
     idiomas: ['Inglês'],
     cor: '#4dc8c8',
     edital: 'https://drive.google.com/file/d/1huIfg17g4hgmL0nfxRNzwIeZjbkcdKPp/view?usp=sharing',
-    inscricao: 'https://forms.gle/Xrmdj4zkdb5utRnq8',
+    inscricao: 'encerrada',
   },
   ppgmcf: {
     name: 'PPGMCF',
@@ -486,7 +490,7 @@ const programas = {
     idiomas: ['Inglês'],
     cor: '#e8c400',
     edital: 'https://drive.google.com/file/d/1-RUNYx4jtIdSSrxKIs_EfhYpW6lLIceM/view?usp=sharing',
-    inscricao: 'https://forms.gle/LwWZNcm954f49mpS9',
+    inscricao: 'encerrada',
   },
   ppgsca: {
     name: 'PPGSCA',
@@ -531,7 +535,10 @@ const ICON_DOC = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" st
 const ICON_PEN = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;pointer-events:none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
 const ICON_INFO = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;pointer-events:none"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
 
-function showDetail(id) {
+// Registra a home no histórico ao carregar
+history.replaceState({ page: 'home' }, '');
+
+function renderDetail(id) {
   const p = programas[id];
   document.getElementById('home').style.display = 'none';
 
@@ -558,7 +565,9 @@ function showDetail(id) {
     ? `<a href="${p.edital}" target="_blank" rel="noopener" class="action-btn btn-edital">${ICON_DOC} Ver Edital (PDF)</a>`
     : `<span class="action-btn btn-aviso">${ICON_DOC} Edital indisponível</span>`;
 
-  const btnInscricao = p.inscricao
+  const btnInscricao = p.inscricao === 'encerrada'
+    ? `<span class="action-btn btn-encerrado">${ICON_PEN} Inscrições Encerradas</span>`
+    : p.inscricao
     ? `<a href="${p.inscricao}" target="_blank" rel="noopener" class="action-btn btn-inscricao">${ICON_PEN} Fazer Inscrição</a>`
     : `<span class="action-btn btn-aviso">${ICON_PEN} Inscrições via edital</span>`;
 
@@ -578,7 +587,13 @@ function showDetail(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function goBack() {
+function showDetail(id) {
+  // Empurra a tela de detalhe no histórico do browser
+  history.pushState({ page: 'detail', id }, '');
+  renderDetail(id);
+}
+
+function renderHome() {
   document.getElementById('detail').style.display = 'none';
   const home = document.getElementById('home');
   home.style.display = 'block';
@@ -587,6 +602,20 @@ function goBack() {
   home.classList.add('fade');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+function goBack() {
+  // Usa o histórico nativo — assim o botão do browser e o botão da tela fazem a mesma coisa
+  history.back();
+}
+
+// Intercepta o botão voltar do browser / swipe do celular
+window.addEventListener('popstate', e => {
+  if (!e.state || e.state.page === 'home') {
+    renderHome();
+  } else if (e.state.page === 'detail') {
+    renderDetail(e.state.id);
+  }
+});
 </script>
 </body>
 </html>
