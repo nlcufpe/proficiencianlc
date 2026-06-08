@@ -299,6 +299,33 @@
   .insta-btn:hover { opacity: .88; }
   .footer-copy { font-size: .7rem; color: #ccc; }
 
+  /* ── LABELS DE STATUS ── */
+  .status-label {
+    grid-column: 1 / -1;
+    font-size: .7rem; font-weight: 700; letter-spacing: .7px;
+    text-transform: uppercase; padding: .3rem .75rem;
+    border-radius: 20px; display: inline-flex;
+    align-items: center; gap: .4rem;
+    width: fit-content; margin-top: .5rem;
+  }
+  .status-label::before {
+    content: '';
+    display: inline-block;
+    width: 7px; height: 7px; border-radius: 50%;
+  }
+  .status-aberta   { background: #edfbf0; color: #1a7a3a; }
+  .status-aberta::before { background: #2ecc71; }
+  .status-aabrir   { background: #fff8e6; color: #8a6000; }
+  .status-aabrir::before { background: #f7941d; }
+  .status-encerrada { background: #fdf2f2; color: #922b21; }
+  .status-encerrada::before { background: #c0392b; }
+  .status-geral    { background: #f0f4ff; color: #1a3a7a; }
+  .status-geral::before { background: #3d5af1; }
+
+  /* Cards encerrados — levemente opacificados */
+  .prog-card-dim { opacity: .6; }
+  .prog-card-dim:hover { opacity: 1; }
+
   /* ── ANIMAÇÃO ── */
   .fade { animation: fadeIn .22s ease both; }
   @keyframes fadeIn {
@@ -326,34 +353,8 @@
 
     <div class="prog-grid">
 
-      <!-- DESTAQUE: ProfNLC Geral -->
-      <div class="prog-card destaque" onclick="showDetail('geral')" role="button" tabindex="0" aria-label="ProfNLC Geral">
-        <div class="prog-accent" style="background: linear-gradient(180deg,#f7941d,#fbb55e)"></div>
-        <div class="prog-card-body">
-          <div class="destaque-info">
-            <div class="prog-name">ProfNLC Geral</div>
-            <div class="prog-sub" style="margin-top:.3rem">Edital 012/2026 · Para qualquer PPG da UFPE</div>
-            <div class="destaque-tags">
-              <span class="destaque-tag">Inglês</span>
-              <span class="destaque-tag">Francês</span>
-              <span class="destaque-tag">Espanhol</span>
-            </div>
-          </div>
-          <span class="prog-arrow">›</span>
-        </div>
-      </div>
-
-      <!-- PPGENF -->
-      <div class="prog-card" onclick="showDetail('ppgenf')" role="button" tabindex="0" aria-label="PPGENF">
-        <div class="prog-accent" style="background:#4dc8c8"></div>
-        <div class="prog-card-body">
-          <div class="prog-card-top">
-            <span class="prog-name">PPGENF</span>
-            <span class="prog-arrow">›</span>
-          </div>
-          <div class="prog-sub">Programa de Pós-Graduação em Enfermagem</div>
-        </div>
-      </div>
+      <!-- SEÇÃO: Inscrições Abertas -->
+      <div class="status-label status-aberta">Inscrições abertas</div>
 
       <!-- PPGMCF -->
       <div class="prog-card" onclick="showDetail('ppgmcf')" role="button" tabindex="0" aria-label="PPGMCF">
@@ -367,17 +368,20 @@
         </div>
       </div>
 
-      <!-- PPGD -->
-      <div class="prog-card" onclick="showDetail('ppgd')" role="button" tabindex="0" aria-label="PPGD">
-        <div class="prog-accent" style="background:#e8c400"></div>
+      <!-- PPGNAFPF -->
+      <div class="prog-card" onclick="showDetail('ppgnafpf')" role="button" tabindex="0" aria-label="PPGNAFPF">
+        <div class="prog-accent" style="background:#2e86ab"></div>
         <div class="prog-card-body">
           <div class="prog-card-top">
-            <span class="prog-name">PPGD</span>
+            <span class="prog-name">PPGNAFPF</span>
             <span class="prog-arrow">›</span>
           </div>
-          <div class="prog-sub">Programa de Pós-Graduação em Direito</div>
+          <div class="prog-sub">Programa de Pós-Graduação em Nutrição, Atividade Física e Plasticidade Fenotípica</div>
         </div>
       </div>
+
+      <!-- SEÇÃO: A abrir -->
+      <div class="status-label status-aabrir">Inscrições a abrir</div>
 
       <!-- PPGSCA -->
       <div class="prog-card" onclick="showDetail('ppgsca')" role="button" tabindex="0" aria-label="PPGSCA">
@@ -403,17 +407,63 @@
         </div>
       </div>
 
-      <!-- PPGNAFPF -->
-      <div class="prog-card" onclick="showDetail('ppgnafpf')" role="button" tabindex="0" aria-label="PPGNAFPF">
-        <div class="prog-accent" style="background:#2e86ab"></div>
+      <!-- PPGH -->
+      <div class="prog-card" onclick="showDetail('ppgh')" role="button" tabindex="0" aria-label="PPGH">
+        <div class="prog-accent" style="background:#c0392b"></div>
         <div class="prog-card-body">
           <div class="prog-card-top">
-            <span class="prog-name">PPGNAFPF</span>
+            <span class="prog-name">PPGH</span>
             <span class="prog-arrow">›</span>
           </div>
-          <div class="prog-sub">Programa de Pós-Graduação em Nutrição, Atividade Física e Plasticidade Fenotípica</div>
+          <div class="prog-sub">Programa de Pós-Graduação em História</div>
         </div>
       </div>
+
+      <!-- DESTAQUE: ProfNLC Geral -->
+      <div class="prog-card destaque" onclick="showDetail('geral')" role="button" tabindex="0" aria-label="ProfNLC Geral">
+        <div class="prog-accent" style="background: linear-gradient(180deg,#f7941d,#fbb55e)"></div>
+        <div class="prog-card-body">
+          <div class="destaque-info">
+            <div class="prog-name">ProfNLC Geral</div>
+            <div class="prog-sub" style="margin-top:.3rem">Edital 012/2026 · Para qualquer PPG da UFPE</div>
+            <div class="destaque-tags">
+              <span class="destaque-tag">Inglês</span>
+              <span class="destaque-tag">Francês</span>
+              <span class="destaque-tag">Espanhol</span>
+            </div>
+          </div>
+          <span class="prog-arrow">›</span>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: Encerradas -->
+      <div class="status-label status-encerrada">Inscrições encerradas</div>
+
+      <!-- PPGENF -->
+      <div class="prog-card prog-card-dim" onclick="showDetail('ppgenf')" role="button" tabindex="0" aria-label="PPGENF">
+        <div class="prog-accent" style="background:#4dc8c8"></div>
+        <div class="prog-card-body">
+          <div class="prog-card-top">
+            <span class="prog-name">PPGENF</span>
+            <span class="prog-arrow">›</span>
+          </div>
+          <div class="prog-sub">Programa de Pós-Graduação em Enfermagem</div>
+        </div>
+      </div>
+
+      <!-- PPGD -->
+      <div class="prog-card prog-card-dim" onclick="showDetail('ppgd')" role="button" tabindex="0" aria-label="PPGD">
+        <div class="prog-accent" style="background:#e8c400"></div>
+        <div class="prog-card-body">
+          <div class="prog-card-top">
+            <span class="prog-name">PPGD</span>
+            <span class="prog-arrow">›</span>
+          </div>
+          <div class="prog-sub">Programa de Pós-Graduação em Direito</div>
+        </div>
+      </div>
+
+
 
     </div>
 
@@ -518,6 +568,15 @@ const programas = {
     cor: '#2e86ab',
     edital: 'https://drive.google.com/file/d/1cbAUgld8HBxhRpgn_Ib4ShMgOWpPQvDJ/view?usp=sharing',
     inscricao: 'https://forms.gle/pngkrPvjV2ozZrbGA',
+  },
+  ppgh: {
+    name: 'PPGH',
+    sub: 'Programa de Pós-Graduação em História',
+    info: null,
+    idiomas: ['Inglês'],
+    cor: '#c0392b',
+    edital: 'https://drive.google.com/file/d/1mPiSnSiDFANmJlnU46VQzpDnnURxLnMe/view?usp=sharing',
+    inscricao: null,
   },
 };
 
