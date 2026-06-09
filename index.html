@@ -380,6 +380,18 @@
         </div>
       </div>
 
+      <!-- PPGNUTRI -->
+      <div class="prog-card" onclick="showDetail('ppgnutri')" role="button" tabindex="0" aria-label="PPGNUTRI">
+        <div class="prog-accent" style="background:#7b5ea7"></div>
+        <div class="prog-card-body">
+          <div class="prog-card-top">
+            <span class="prog-name">PPGNUTRI</span>
+            <span class="prog-arrow">›</span>
+          </div>
+          <div class="prog-sub">Programa de Pós-Graduação em Nutrição</div>
+        </div>
+      </div>
+
       <!-- SEÇÃO: A abrir -->
       <div class="status-label status-aabrir">Inscrições a abrir</div>
 
@@ -392,18 +404,6 @@
             <span class="prog-arrow">›</span>
           </div>
           <div class="prog-sub">Programa de Pós-Graduação em Saúde da Criança e do Adolescente</div>
-        </div>
-      </div>
-
-      <!-- PPGNUTRI -->
-      <div class="prog-card" onclick="showDetail('ppgnutri')" role="button" tabindex="0" aria-label="PPGNUTRI">
-        <div class="prog-accent" style="background:#7b5ea7"></div>
-        <div class="prog-card-body">
-          <div class="prog-card-top">
-            <span class="prog-name">PPGNUTRI</span>
-            <span class="prog-arrow">›</span>
-          </div>
-          <div class="prog-sub">Programa de Pós-Graduação em Nutrição</div>
         </div>
       </div>
 
@@ -554,11 +554,11 @@ const programas = {
   ppgnutri: {
     name: 'PPGNUTRI',
     sub: 'Programa de Pós-Graduação em Nutrição',
-    info: 'Inscrições não disponíveis via link direto. Acesse o edital e siga as instruções de inscrição descritas no documento.',
+    info: null,
     idiomas: ['Inglês'],
     cor: '#7b5ea7',
     edital: 'https://drive.google.com/file/d/1VXIJ_OV-GMY4p7Uru3pjUtWEUGi_bM98/view?usp=sharing',
-    inscricao: null,
+    inscricao: 'https://forms.gle/JjhM5BWCD3dq67G48',
   },
   ppgnafpf: {
     name: 'PPGNAFPF',
